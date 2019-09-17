@@ -1,0 +1,167 @@
+
+        <header class="brand-header">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-6">
+                          <h1>Leave Management System</h1>
+                        </div>
+                        <div class="col-5 text-right">
+                          <img src="./assets/img/Logo.gif"> 
+                        </div> 
+                      </div> 
+                </div>
+              </header><br>
+              
+              <div class="container" id="container"> 
+<!-- Navbar which has Create Leave and Approve Leave Button -->
+ <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/create-leave/{{employeeId}}">Create Leaves</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" routerLink="/view-request/{{employeeId}}" >Dashboard</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/approve-leave/{{employeeId}}">Approve Leaves</a>
+        </li>&nbsp;
+        <li class="nav-item">
+            <button class ="btn btn-danger" (click)="onLogout()">Logout</button>
+        </li>
+      </ul>
+
+
+ <!-- Table of Employee Details -->
+            <div class="card-reader">
+                <h6>Employee Details</h6>
+            </div>
+            <div *ngIf="empDetails" class="details">
+
+                <table class="table table-striped">
+
+                    <tr>
+                        <td>Employee Code- {{empDetails.empCode}}</td>
+                        <td>Name- {{empDetails.employeeName}}</td>
+                        <td>LOB- {{empDetails.lob}}</td>
+                       
+                   </tr>
+                    <tr>
+                        <td> Email Id- {{empDetails.emailId}}</td>
+                        <td> Mobile- {{empDetails.mobile}}</td>
+                        <td>Vertical- {{empDetails.vertical}}</td>
+                    </tr>
+                </table>
+            </div>
+
+   <!-- Table of Leave Balances -->
+       <div class="card-reader">
+         <h6>Leave Types</h6>
+        </div>
+            <table class="table table-striped"[mfData]="leaves" #mf="mfDataTable">
+                <thead>
+                        <tr>
+                                <th style="width: 10%">
+                                    <mfDefaultSorter by="leavecode">LeaveCode</mfDefaultSorter>
+                                </th>
+                                 <th style="width: 10%">
+                                    <mfDefaultSorter by="leaveType">Leave Type</mfDefaultSorter>
+                                </th> 
+                                <th style="width: 10%">
+                                    <mfDefaultSorter by="openingBalance">Total Leaves</mfDefaultSorter>
+                                </th>
+                                <th style="width: 10%">
+                                    <mfDefaultSorter by="balance">Balance</mfDefaultSorter>
+                                </th>
+                       </tr>
+                </thead>
+                <tbody>
+                         <tr *ngFor="let user of leaveData">
+                                <td>{{user.leaveCode}}</td>
+                                <td>{{user.leaveType}}</td>
+                                <td>{{user.leaveBalance}}</td>
+                                <td>{{user.balance}}</td>
+                        </tr> 
+
+                </tbody>
+            </table>  
+
+
+             <!-- Table for managing leaves -->
+             <!-- we have divided the screen into parts of 10% each and assigning fields and values in each part  -->
+            <div class="card-reader">
+                <h6>Manage Leaves</h6>
+            </div>
+            <div *ngIf="leaves.length>0">
+                <table class="table table-striped" [mfData]="leaves" #mf="mfDataTable" [mfRowsOnPage]="4">
+                    <thead>
+                        <tr>
+                            <th style="width: 10%">
+                                <mfDefaultSorter by="EmplId">EmplId</mfDefaultSorter>
+                            </th>
+                             <th style="width: 10%">
+                                <mfDefaultSorter by="EmplId">Name</mfDefaultSorter>
+                            </th> 
+                            <th style="width: 10%">
+                                <mfDefaultSorter by="Date of Request">Date of request</mfDefaultSorter>
+                            </th>
+                            <th style="width: 10%">
+                                <mfDefaultSorter by="Leave Type">Leave Type</mfDefaultSorter>
+                            </th>
+                            <th style="width: 10%">
+                                <mfDefaultSorter by="From Date">From Date</mfDefaultSorter>
+                            </th>
+                            <th style="width: 10%">
+                                <mfDefaultSorter by="To Date">To Date</mfDefaultSorter>
+                            </th>
+                            <th style="width: 10%">
+                                <mfDefaultSorter by="Leave Days">Leave Days</mfDefaultSorter>
+                            </th>
+                            <th style="width: 10%">
+                                <mfDefaultSorter by="Reason For  Leave">Reason For Leave</mfDefaultSorter>
+                            </th>
+                            <th style="width: 10%">
+                                <mfDefaultSorter by="Status">Status</mfDefaultSorter>
+                            </th>
+                            <th style="width: 10%">
+                                    <mfDefaultSorter by="Approve Date">Approve Date</mfDefaultSorter>
+                                </th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- assigning values to the respective fields -->
+                        <tr *ngFor="let user of mf.data">
+                            <td>{{user.empCode}}</td>
+                            <td>{{user.empName}}</td>
+                            <td>{{user.dateOfRequest | date:'mediumDate'}}</td>
+                            <td>{{user.leaveTypeMaster.leaveType}}</td>
+                            <td>{{user.fromDate | date:'mediumDate'}}</td>
+                            <td>{{user.toDate | date:'mediumDate'}}</td>
+                            <td>{{user.days}}</td>
+                            <td>{{user.reasons}}</td>
+                            <td>{{user.statusMaster.statusDescription}}</td>
+                            <td >{{user.approvalDate | date:'mediumDate'}}</td>
+
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="4">
+                                <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <div *ngIf="leaves.length==0">No record found</div>
+        </div><footer class="brand-footer">
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <span class="copyright">&copy; Copyright, All rights reserved. EvalueServe</span>
+                    </div>
+                    <div class="col-md-6">
+                      <span class="other-info"></span>
+                      </div>
+                  </div>
+                </div>
+              </footer>

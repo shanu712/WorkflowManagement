@@ -1,0 +1,108 @@
+
+   
+    <header class="brand-header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-6">
+                  <h1>Leave Management System</h1>
+                </div>
+                <div class="col-5 text-right">
+                  <img src="./assets/img/Logo.gif"> 
+                </div> 
+              </div> 
+        </div>
+      </header><br>
+      <div class="container" id="container">
+          <ul class="nav nav-tabs">
+              <li class="nav-item">
+                  <a class="nav-link active" routerLink="/create-leave/{{employeeId}}">Create Leaves</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" routerLink="/view-request/{{employeeId}}" >Dashboard</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" routerLink="/approve-leave/{{employeeId}}">Approve Leaves</a>
+              </li>&nbsp;
+              <li class="nav-item">
+                  <button class ="btn btn-danger" (click)="onLogout()">Logout</button>
+              </li>
+            </ul>
+
+<div class="container-fluid">
+    <div> 
+  <h4>Requestor Detail</h4>
+  <div [hidden]="!postError" class="alert alert-danger">{{ postErrorMessage }}</div>
+   <form #form="ngForm" (ngSubmit)="onSubmit(form)" class="login--form"> 
+
+    <label for="emplid">Employee Id :{{this.employeeId}} </label>
+    <br>
+    
+     <div class="form-group">
+      <label for="fromDate">From :</label><br>
+     <input type="date" id="fromDate" name="fromDate" class="col-xs-4"  min= "Datetime.Now()" onkeydown="return false"
+     (change)="cal()" [(ngModel)]="createLeave.fromDate"  required
+        #fromDate="ngModel" [class.field-error]="form.submitted && fromDate.invalid">
+      <div [hidden]="!form.submitted || fromDate.valid" class="alert alert-danger">
+        Enter a date
+      </div>
+    </div> 
+    
+    <div class="form-group">
+      <label for="toDate">To: </label><br>
+      <input type="date" id="toDate" name="toDate" class="col-xs-4"  min="2019-08-13" onkeydown="return false"
+      (change)="cal()" [(ngModel)]="createLeave.toDate" required
+      #toDate="ngModel" [class.field-error]="form.submitted && toDate.invalid"> 
+      <div [hidden]="!form.submitted || toDate.valid" class="alert alert-danger">
+          Enter a date
+        </div>
+    </div> 
+   
+    <div class="form-group">
+    <label for="Days">Leave Days</label><br>
+     <input id="countDays" name="Days" class="col-xs-4" [(ngModel)]="countLeaves"> 
+  </div>
+    
+
+
+    <div class="form-group">
+        <label>Leave Type</label><br>
+        <select [(ngModel)]="createLeave.leaveTypeId" class="" name="leaveTypeId">
+           <option value="">Select</option>
+            <option *ngFor="let data of leaveData" value={{data.leaveTypeId}}>{{data.leaveType}}</option>
+          </select> 
+        <!-- <select [(ngModel)]="leaveData" name="leaveData">
+
+           <option *ngFor="let data of leaveData" name="leaveTypeId" value="data.leaveTypeId" [(ngModel)]="data.leaveTypeId">
+             {{data.leaveTypeId}}
+             {{data.leaveType}}
+             </option>
+        </select> -->
+   </div>
+    
+    <div class="form-group">
+    <label for="reasons">Reasons </label><br>
+    <input id="reasons" name="reasons" class="col-xs-4" maxlength="50"  [(ngModel)]="createLeave.Reasons"  required 
+    #nameField="ngModel" [class.field-error]="form.submitted && nameField.invalid"> 
+    <div [hidden]="!form.submitted || nameField.valid" class="alert alert-danger">
+        This field is required
+      </div> 
+    <br><br>
+</div>
+    <button class ="btn btn-primary">Submit</button>&nbsp;&nbsp;&nbsp;
+    <button class ="btn btn-danger" (click) = "onCancel()">Cancel</button>
+  </form> </div>
+</div>
+</div>
+
+<footer class="brand-footer">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-6">
+          <span class="copyright">&copy; Copyright, All rights reserved. EvalueServe</span>
+        </div>
+        <div class="col-md-6">
+          <span class="other-info"></span>
+          </div>
+      </div>
+    </div>
+  </footer>

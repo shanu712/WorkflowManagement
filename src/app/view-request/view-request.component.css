@@ -1,0 +1,26 @@
+.header-logo{
+    width: 60%;
+    margin: 7px;
+    text-align: center;
+    margin-left:9%;
+    
+}
+.header-image{
+  display:inline-block;
+  text-align: left;
+  display: inline-block;
+  position: absolute;
+  left: 1%;
+margin-left: 78%;
+width:28%;
+}
+.details{
+  background-color: rgb(223, 232, 240);
+}
+
+#logout{
+  margin-left: 65%;
+}
+::ng-deep #container{
+  min-height: calc(100vh - 135px)
+}

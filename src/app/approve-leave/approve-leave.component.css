@@ -1,0 +1,6 @@
+/* #logout{
+    margin-left: 80%;
+  } */
+ ::ng-deep #container{
+    min-height: calc(100vh - 135px)
+  }

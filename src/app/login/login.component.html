@@ -1,0 +1,51 @@
+
+  <header class="brand-header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-6">
+              <h1>Leave Management System</h1>
+            </div>
+            <div class="col-5 text-right">
+              <img src="./assets/img/Logo.gif"> 
+            </div> 
+          </div> 
+    </div>
+  </header>
+  <section>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-3">
+          &nbsp;
+        </div>
+        <div class="col-md-6">
+            <form #form="ngForm" autocomplete="off" (ngSubmit)="onSubmit(form)" class="login--form">
+                <div class="form-group">
+                  <label><strong>Employee Code</strong> </label>
+                  <input #EmpCode ="ngModel" class="form-control" name="EmpCode"  maxlength="20"[(ngModel)]="loginData.EmpCode" required/>
+              
+                </div>
+                <div class="form-group">
+                  
+                  <label><strong>Password</strong></label>
+                  <input #Password="ngModel" type="password" class="form-control" name="Password"  [(ngModel)]="loginData.Password" required/>
+                  <small id="emailHelp" class="form-text text-muted"> Never share your Password with anyone else.</small>
+                </div>
+             
+                <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Submit</button>
+              </form>
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer class="brand-footer">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-6">
+          <span class="copyright">&copy; Copyright, All rights reserved. EvalueServe</span>
+        </div>
+        <div class="col-md-6">
+          <span class="other-info"></span>
+          </div>
+      </div>
+    </div>
+  </footer>

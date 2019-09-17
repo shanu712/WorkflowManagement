@@ -1,0 +1,118 @@
+
+   <!-- Header -->
+   <header class="brand-header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-6">
+                  <h1>Leave Management System</h1>
+                </div>
+                <div class="col-5 text-right">
+                  <img src="./assets/img/Logo.gif"> 
+                </div> 
+              </div> 
+        </div>
+      </header><br>
+      <div class="container" id="container">
+<!-- navbar -->
+<ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link " routerLink="/create-leave/{{employeeId}}">Create Leaves</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/view-request/{{employeeId}}" >Dashboard</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" routerLink="/approve-leave/{{employeeId}}">Approve Leaves</a>
+        </li>&nbsp;
+        <li class="nav-item">
+            <button class ="btn btn-danger" (click)="onLogout()">Logout</button>
+        </li>
+      </ul>
+
+        <div class =""width = 20%>
+        <label for ="emplid">Employee Id :{{this.employeeId}} </label>
+       
+    </div>
+    <div class ="card-reader">Manage Leaves
+        </div> 
+    <table class="table table-striped" [mfData]="leaves" #mf="mfDataTable" [mfRowsOnPage]="5">
+        <thead>
+        <tr>
+               
+            <th style="width: 10%">
+                <mfDefaultSorter by="EmplId">EmplId </mfDefaultSorter>
+            </th>
+            <th style="width: 10%">
+                <mfDefaultSorter by="Name">Name </mfDefaultSorter>
+            </th>
+            <th style="width: 10%">
+                <mfDefaultSorter by="Date of Request">Date of request</mfDefaultSorter>
+            </th>
+            <th style="width: 10%">
+                <mfDefaultSorter by="From Date">From Date</mfDefaultSorter>
+            </th>
+            <th style="width: 10%">
+                    <mfDefaultSorter by="To Date">To Date</mfDefaultSorter>
+                </th>
+                <th style="width: 10%">
+                    <mfDefaultSorter by="leavetype">Leave Type </mfDefaultSorter>
+                </th>
+                <th style="width: 10%">
+                        <mfDefaultSorter by="Leave Days">Leave Days</mfDefaultSorter>
+                    </th>
+                        <th style="width: 10%">
+                                <mfDefaultSorter by="Reason For  Leave">Reason For  Leave</mfDefaultSorter>
+                            </th>
+                          
+                                <th style="width: 10%">
+                                        <mfDefaultSorter by="Status">Status</mfDefaultSorter>
+                                    </th>
+                                    <th style="width: 10%">
+                                            <mfDefaultSorter by="Status">Action</mfDefaultSorter>
+                                        </th>
+                                        <th style="width: 10%" >
+                                            <mfDefaultSorter by="Approve Date">Action Date</mfDefaultSorter>
+                                        </th>
+        </tr>
+        </thead>
+    
+        <tbody>
+            
+            <tr *ngFor="let user of leavedetails">
+            
+                   <td>{{user.empCode}}</td>
+                   <td>{{user.empName }}</td>
+                   <td>{{user.dateOfRequest | date:'mediumDate'}}</td>
+                   <td>{{user.fromDate | date:'mediumDate'}}</td>
+                   <td>{{user.toDate | date:'mediumDate'}}</td>
+                   <td>{{user.leaveType}}</td>
+                    <td>{{user.days}}</td>
+                   <td>{{user.reasons}}</td>
+                   
+                   <td>{{user.statusName}}</td>
+                   <td>
+                        <div class="form-group">
+                            
+             <button *ngIf="user.statusName == 'Pending'" class=" btn btn-primary " (click)="putApproval(user.employeeLeaveID,'Approve')">Approve</button><br><br> 
+             <button *ngIf="user.statusName == 'Pending'" class=" btn btn-danger "(click)="putApproval(user.employeeLeaveID,'Reject')">&nbsp; Reject &nbsp;</button>
+                            </div>
+                   </td>
+                   <td >{{user.approvalDate | date:'mediumDate'}}</td> 
+           
+               </tr> 
+               </tbody>
+        </table>
+    </div> 
+    
+    <footer class="brand-footer">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-md-6">
+                  <span class="copyright">&copy; Copyright, All rights reserved. EvalueServe</span>
+                </div>
+                <div class="col-md-6">
+                  <span class="other-info"></span>
+                  </div>
+              </div>
+            </div>
+          </footer>

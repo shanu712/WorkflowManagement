@@ -1,0 +1,25 @@
+/* You can add global styles to this file, and also import other style files */
+
+.brand-header {
+    background: #f0f0f0;
+    padding: 6px 0;
+    border-bottom: 1px solid #ddd;
+    box-shadow: 1px 0px 6px 0px rgba(0,0,0,0.45);
+   }
+   .brand-header h1 {
+    font-size: 22px;
+    color: #305EA5;
+    margin: 16px 0 0 0;
+   }
+  
+    .brand-footer {
+        background: #ccc;
+         /* position: relative; */
+        bottom: 0;
+        width: 100%;
+        padding: 15px 0;
+      }
+      .copyright {
+        font-size: 14px;
+        color: #fff;
+      }  
