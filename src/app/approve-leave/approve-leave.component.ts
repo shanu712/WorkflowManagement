@@ -85,8 +85,8 @@ export class ApproveLeaveComponent implements OnInit {
      body = {
            "To":this.data,
            "Cc":this.empDetails.emailId,
-           "Text":"Dear  "+name+'\n\n'+"This is the mail regarding your leave request which you raise to your manager on "+selectedData.map(e=> e.dateOfRequest)+'\n'+" your leave has been approved."+'\n\n'+"Following are the details of your leave"+'\n'+"LeaveType:"+selectedData.map(e => e.leaveType)+'\n'+"ToDate:"+selectedData.map(e=>e.toDate)+'\n'+"FromDate:"+selectedData.map(e=>e.fromDate)+'\n'+"Days:"+selectedData.map(e=>e.days)+"."+'\n\n'+"If you further have any associated problem, direct towards management. "+"\n\n"+"Regards:"+this.empDetails.employeeName+'\n\n'+"Manager"+'\n'+"Evalueserve.com pvt ltd",
-           "Subject":"Leave approval"+selectedData.map(e =>e.dateOfRequest)+"Approved"
+           "Text":"Dear\t"+name+'\n\n'+"This is the mail regarding your leave request which you raise to your manager on "+selectedData.map(e=> e.dateOfRequest)+'\n'+" your leave has been approved."+'\n\n'+"Following are the details of your leave"+'\n'+"LeaveType:"+selectedData.map(e => e.leaveType)+'\n'+"ToDate:"+selectedData.map(e=>e.toDate)+'\n'+"FromDate:"+selectedData.map(e=>e.fromDate)+'\n'+"Days:"+selectedData.map(e=>e.days)+"."+'\n\n'+"If you further have any associated problem, direct towards management. "+"\n\n"+"Regards:"+this.empDetails.employeeName+'\n\n'+"Manager"+'\n'+"Evalueserve.com pvt ltd",
+           "Subject":"Leave approval\t"+selectedData.map(e =>e.dateOfRequest)+"\tApproved"
 
      };
     
@@ -116,8 +116,8 @@ export class ApproveLeaveComponent implements OnInit {
         body = {
           "To":this.data,
           "Cc":this.empDetails.emailId,
-          "Text":"Dear  "+name+'\n\n'+"This Mail is to communicate you regarding the application of your leave. We understand that you might have an issue but due to too much of pending work, we cannot allow you to take leaves . You have already availed  leaves earlier , plz try to understand and apply leaves after deployment of project . If you further have any associated problem, direct towards management. "+"\n\n"+"Regards:"+this.empDetails.employeeName+'\n\n'+"Manager"+'\n'+"Evalueserve.com pvt ltd",
-          "Subject":"Leave approval Requested on "+date +"Rejected"
+          "Text":"Dear\t"+name+'\n\n'+"This Mail is to communicate you regarding the application of your leave. We understand that you might have an issue but due to too much of pending work, we cannot allow you to take leaves . You have already availed  leaves earlier , plz try to understand and apply leaves after deployment of project . If you further have any associated problem, direct towards management. "+"\n\n"+"Regards:"+this.empDetails.employeeName+'\n\n'+"Manager"+'\n'+"Evalueserve.com pvt ltd",
+          "Subject":"Leave approval Requested on\t"+date +"\tRejected"
 
     };
     this.requestService.postActionleaves(body)
