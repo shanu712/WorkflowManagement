@@ -2,11 +2,11 @@
  import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
  import { Observable } from 'rxjs';
  import { AuthService } from '../service/authentication-service/authentication-service';
-import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
+import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router';
 
 export class TokenInterceptor implements HttpInterceptor{
     currentUserValue :any;
-    constructor() { }
+    constructor(private route:Router) { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         // add authorization header with jwt token if available
@@ -19,6 +19,12 @@ export class TokenInterceptor implements HttpInterceptor{
                     Authorization: `Bearer ${token}`
                 }
             });
+        }
+        else{
+         function   onLogout(){
+             localStorage.removeItem('token');
+this.route.navigate[""];
+            }
         }
 
         return next.handle(request);

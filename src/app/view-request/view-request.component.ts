@@ -55,7 +55,13 @@ export class ViewRequestComponent implements OnInit {
       this.leaves = [];
       this.requestService.getleaveInfo(this.employeeId).subscribe(x => {
        if (x)
-      this.leaves=x;
+      {this.leaves=x;}
+      else{
+        this.onLogout();
+      }
+    },error => {
+      console.log("unauthorized");
+      this.onLogout();
     });
   }
 
