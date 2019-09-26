@@ -5,6 +5,7 @@ import { ApproveService } from '../service/approve-service/approve-service';
 import { CreateMail } from './create-mail-data';
 import {ViewRequestComponent}  from 'src/app/view-request/view-request.component'
 import { IfStmt, analyzeAndValidateNgModules } from '@angular/compiler';
+import { DatePipe } from '@angular/common';
 @Component({
 
   selector: 'app-approve-leave',
@@ -70,7 +71,7 @@ export class ApproveLeaveComponent implements OnInit {
  var name = selectedData.map(e=> e.empName);
  this.data = result;
 
- 
+ var date =  selectedData.map(e =>{e.dateOfRequest  });
   
      if(status == 'Approve'){
       
@@ -80,7 +81,7 @@ export class ApproveLeaveComponent implements OnInit {
           "path":"/status",
           "value":"2"
         }];
-     var date =   selectedData.map(e =>e.dateOfRequest);
+    
      
      body = {
            "To":this.data,
@@ -116,8 +117,8 @@ export class ApproveLeaveComponent implements OnInit {
         body = {
           "To":this.data,
           "Cc":this.empDetails.emailId,
-          "Text":"Dear\t"+name+'\n\n'+"This Mail is to communicate you regarding the application of your leave. We understand that you might have an issue but due to too much of pending work, we cannot allow you to take leaves . You have already availed  leaves earlier , plz try to understand and apply leaves after deployment of project . If you further have any associated problem, direct towards management. "+"\n\n"+"Regards:"+this.empDetails.employeeName+'\n\n'+"Manager"+'\n'+"Evalueserve.com pvt ltd",
-          "Subject":"Leave approval Requested on\t"+date +"\tRejected"
+          "Text":"Dear\t"+name+'\n\n'+"This Mail is to communicate you regarding the application of your leave. We understand that you might have an issue but due to too much of pending work, we cannot allow you to take leaves . You have already availed  leaves earlier , plz try to understand and apply leaves after deployment of project . If you further have any associated problem, direct towards management. "+"\n\n"+"Regards:"+this.empDetails.employeeName+'\n\n'+"Manager"+'\n'+"Evalueserve.com pvt ltd"+'\n\n\n',
+          "Subject":"Leave approval Requested on\t"+selectedData.map(e =>{e.dateOfRequest  }) +"\tRejected"
 
     };
     this.requestService.postActionleaves(body)
